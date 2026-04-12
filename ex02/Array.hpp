@@ -1,25 +1,22 @@
-#include <iostream>
-#include <array>
+#pragma once
 #include <stdexcept>
-// #include <excpetions>
+// from General rules:
+// • Any function implementation put in a header file (except for function templates)
+// means 0 to the exercise.
 
 template <typename T> class Array {
 	public:
-		Array(){ //constructor with no parameter
-			_array = new T();
-			_size = 0; 
+		Array() : _array(new T[0]), _size(0) { //constructor with no parameter
 		};
-		Array(unsigned int n){  //constructor with unsigned int n as aparameter 
-			_array = new T[n]; 
-			_size = n; 
+		Array(unsigned int n) : _array(new T[n]), _size(n) {  //constructor with unsigned int n as aparameter 
 		};
 		T &operator[](int idx){
-			if (idx > this->_size || idx < 0)
+			if (idx >= this->_size || idx < 0)
 				throw std::out_of_range("out of range");
 			return _array[idx];
 		};
-		const T operator[](int idx) const { //subscript operator
-			if (idx > this->_size || idx < 0)
+		const T &operator[](int idx) const { //subscript operator
+			if (idx >= this->_size || idx < 0)
 				throw std::out_of_range("out of range");
 			return _array[idx];
 		}
@@ -43,7 +40,7 @@ template <typename T> class Array {
 			delete[] _array;
 		};
 
-		int getSize() const{
+		int size() const{
 			return this->_size;
 		};
 		T *getArray(){

@@ -4,14 +4,15 @@
 // • max: Compares the two values passed as parameters and returns the greatest one.
 // If they are equal, it returns the second one.
 
+#pragma once
 #include <iostream>
 
-template <typename T> void swap(T x, T y) {
+template <typename T> void swap(T& x, T& y) {
 	T temp;
 
-	temp = *x;
-	*x = *y;
-	*y = temp;
+	temp = x;
+	x = y;
+	y = temp;
 }
 
 template <typename T> T min(T x, T y) {
